@@ -8,13 +8,13 @@ class Task:
     
     def __init__(self, name, unique_id, due_date = None, priority = 1):
         self.name = name
-        self.due_date = due_date
+        self.due_date = datetime.strptime(due_date,"%m/%d/%Y")
         self.priority = priority
         self.completed = None
         self.created = datetime.now()
         self.unique_id = unique_id
         self.age = "0d"
-        self.list_short = [self.unique_id, self.age, self.due_date, self.priority, self.name]
+        self.list_short = [self.unique_id, self.age, self.due_date.strftime("%b/%d/%Y"), self.priority, self.name]
         self.list_long = [self.unique_id, self.age, self.due_date, self.priority, self.name, self.created.strftime("%a %b %d %H:%M:%S %Z %Y"), self.completed.strftime("%a %b %d %H:%M:%S %Z %Y")]
 
 
@@ -81,8 +81,11 @@ class Tasks:
         self.query_print = []
         for query in query_list:
             for task in self.tasks:
-                if task.name.find(query) > -1:
-                    self.query_print.append(task.list_short)
+                if not task.completed:
+                    if task.name.find(query) > -1:
+                        self.query_print.append(task.list_short)
+        print(tabulate(self.query_print, headers = self.headers_short))
+
 
     def add(self, name, due_date = None, priority = 1):
         self.tasks.append(Task(name, self.unique_id_counter, due_date, priority))
