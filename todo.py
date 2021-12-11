@@ -15,7 +15,7 @@ class Task:
         self.unique_id = unique_id
         self.age = "0d"
         self.list_short = [self.unique_id, self.age, self.due_date.strftime("%b/%d/%Y"), self.priority, self.name]
-        self.list_long = [self.unique_id, self.age, self.due_date, self.priority, self.name, self.created.strftime("%a %b %d %H:%M:%S %Z %Y"), self.completed.strftime("%a %b %d %H:%M:%S %Z %Y")]
+        self.list_long = [self.unique_id, self.age, self.due_date.strftime("%b/%d/%Y"), self.priority, self.name, self.created.strftime("%a %b %d %H:%M:%S %Z %Y"), self.completed]
 
 
     def __str__(self):
